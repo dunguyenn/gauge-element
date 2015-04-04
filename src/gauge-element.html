@@ -1,7 +1,11 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="gauge-element" noscript>
+<polymer-element name="gauge-element" attributes="label data active aperture">
+  <!-- Shadow DOM subtree -->
   <template>
     <span>Hello from <b>gauge-element</b>. This is my Shadow DOM.</span>
+    <link rel="stylesheet" href="gauge-element.css">
   </template>
+
+  <script src="../bower_components/raphael/raphael.js"></script>
 </polymer-element>
