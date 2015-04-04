@@ -1,5 +1,35 @@
-:host {
-  width: 400px;
-  height: 340px;
-  display: inline-block;
+:host
+{
+    display: inline-block;
+
+    width: 400px;
+    height: 340px;
+}
+#gauge
+{
+    .arc
+    {
+        stroke-width: 3;
+        &--default
+        {
+            stroke: rgb(102,102,102);
+        }
+        &--with-color
+        {
+            stroke-width: 3;
+        }
+    }
+    .arrow
+    {
+        z-index: 10;
+
+        fill: rgb(35,134,225);
+        stroke-width: 0;
+    }
+
+    .mark
+    {
+        fill: rgb(225,225,225);
+        stroke-width: 0;
+    }
 }

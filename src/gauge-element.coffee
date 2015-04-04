@@ -1,66 +1,88 @@
 Polymer 'gauge-element',
   created: ->
     console.log 'gauge created'
-#    console.log @
   ready: ->
     console.log "gauge ready"
 
-    arrowColor = "#1e98e4"
-    gaugeColor = "#666"
-
     @.paper = Raphael(@.$.gauge, 400, 340)
-
-    @.arrow = @.paper.path("M200,200 m5,0 L200,10 l-5,200 z").attr
-      "fill": arrowColor
-      "stroke-width": 0
-    .transform("r90,200,200")
-
-    @.paper.circle(200,200,10).attr
-      "fill": arrowColor
-      "stroke-width": 0
-
-    console.log "aperture:" + @.aperture
+    @.arcs = @.paper.set()
+    @.marks = @.paper.set()
+    @.center =
+      x: 200
+      y: 200
 
     startAngle = 90 + (360 - @.aperture)/2
-    console.log "startAngle:" + startAngle
+    angle = @.aperture/(@.data.length-1)
+    arkStartAngle = startAngle - angle/2
 
-    @.arrow.transform("...r" + startAngle + ",200,200")
+#    console.log "aperture:" + @.aperture
+#    console.log "startAngle:" + startAngle
+#    console.log "angle:" + angle
+#    console.log "arkStartAngle:" + arkStartAngle
 
-    angle = @.aperture/@.data.length
-    console.log "angle:" + angle
+#    Рисуем метки
+    @.drawMarks 50, (@.data.length-1)*10
 
-#    @.drawMarks(50, 100)
-
+#    Рисуем деления
     for d, i in @.data
-      endAngle = startAngle + angle
-      color = if d.color? then d.color else gaugeColor
-      @.drawArc(startAngle, endAngle, 180, color)
-      startAngle += angle
+      color = if d.color then d.color
+      endAngle = arkStartAngle + angle
+      switch i
+        when 0
+#          console.log "first arc drawing"
+          @.drawArc(arkStartAngle + angle/2, endAngle, 180, color)
+        when @.data.length-1
+#          console.log "last arc drawing"
+          @.drawArc(arkStartAngle, endAngle - angle/2, 180, color)
+        else
+#          console.log "arc drawing"
+          @.drawArc(arkStartAngle, endAngle, 180, color)
+      arkStartAngle += angle
 
+#    Рисуем стрелку
+    @.drawArrow startAngle
+#    @.rotateArrow 0
+
+#  Параметры по умолчанию
   publish:
     label: ''
     aperture: 270
     data: []
-    arcs: []
-    marks: []
 
   drawArc: (start, end, radius, color) ->
-    startAngle = @.getPointOnCircle 200, 180, start
-    endAngle = @.getPointOnCircle 200, 180, end
+    startAngle = @.getPointOnCircle radius, start
+    endAngle = @.getPointOnCircle radius, end
+    arc = @.paper.path("M" + startAngle.x + "," + startAngle.y + " A" + radius + "," + radius + " 0 0,1 " + endAngle.x + "," + endAngle.y)
+    if color
+      arc.node.setAttribute('class', 'arc arc--with-color')
+      arc.attr({"stroke": color})
+    else
+      arc.node.setAttribute('class', 'arc arc--default')
 
-    @.arcs.push @.paper.path("M" + startAngle.x + "," + startAngle.y + " A" + radius + "," + radius + " 0 0,1 " + endAngle.x + "," + endAngle.y).attr
-      "stroke": color
-      "stroke-width": 4
+    @.arcs.push arc
 
   drawMarks: (R, total) ->
     for i in [0..total]
-      console.log i
       alpha = @.aperture / total
-      a = alpha * Math.PI / 180
-      x = 200 + R * Math.cos(a)
-      y = 200 - R * Math.sin(a)
-      @.marks.push @.paper.circle(x, y, 5)
+      a = @.getPointOnCircle 190, alpha*i
+      mark =  @.paper.circle(a.x, a.y, 1).rotate(90+(360-@.aperture)/2, @.center.x, @.center.y)
+      mark.node.setAttribute('class', 'mark')
+      @.marks.push mark
 
-  getPointOnCircle: (center, radius, angle) ->
-    x: center + radius * Math.cos(Math.PI*angle/180)
-    y: center + radius * Math.sin(Math.PI*angle/180)
+  drawArrow: (angle) ->
+#    Основание стрелки
+    @.paper.circle(@.center.x, @.center.y, 10)
+      .node.setAttribute('class', 'arrow arrow__base')
+
+#    Стрелка
+    @.arrow = @.paper.path("M" + @.center.x + "," + @.center.y + " m0,-5 l190,5 l-190,5 z")
+      .transform("r" + angle + "," + @.center.x + "," + @.center.y)
+    @.arrow.node.setAttribute('class', 'arrow')
+#
+
+  rotateArrow: (angle) ->
+    @.arrow.transform("r" + angle + "," + @.center.x + "," + @.center.y)
+
+  getPointOnCircle: (radius, angle) ->
+    x: @.center.x + radius * Math.cos(Math.PI*angle/180)
+    y: @.center.y + radius * Math.sin(Math.PI*angle/180)
