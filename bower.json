@@ -1,11 +1,16 @@
 {
   "name": "gauge-element",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A web component to display gauge",
+  "main": "index.html",
   "authors": [
     "Oleg Shilov <me@olegshilov.com>"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/olegshilov/gauge-element.git"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
@@ -14,6 +19,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.5.5"
+    "polymer": "Polymer/polymer#~0.5.5",
+    "raphael": "~2.1.4"
   }
 }

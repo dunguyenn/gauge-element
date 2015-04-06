@@ -1,0 +1,27 @@
+:host {
+  display: inline-block;
+  width: 400px;
+  padding: 20px 0;
+  vertical-align: top; }
+
+#gauge svg {
+  overflow: visible !important; }
+#gauge .arc {
+  stroke-width: 3; }
+  #gauge .arc--default {
+    stroke: #666666; }
+#gauge .arrow {
+  fill: #2386e1;
+  stroke-width: 0; }
+#gauge .mark {
+  fill: #e1e1e1;
+  stroke-width: 0; }
+#gauge .label__mark {
+  stroke: #666666;
+  stroke-width: 2; }
+#gauge .label__text tspan {
+  font-size: 14px;
+  fill: #666666; }
+
+
+/*# sourceMappingURL=gauge-element.css.map */

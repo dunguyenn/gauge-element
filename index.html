@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="dist/gauge-element.html">
+</head>
+<body style="text-align: center;">
+  <h1>Gauge element</h1>
+  <hr/>
+  <gauge-element data="[0,1,{'label':2},3,4,{'label':5,'color':'rgb(255,166,30)'},{'label': 6, 'color':'rgb(255,41,5)'}]"
+                 value="4">
+  </gauge-element>
+  <gauge-element data="['zero','one',{'label':'two', 'color': 'rgb(255,166,30)'},'three','four']"
+                 value="0"
+                 aperture="120">
+  </gauge-element>
+  <gauge-element data="['',7,8,9,10,11,12,1,2,3,4,5,6]"
+                 value="0"
+                 aperture="360">
+  </gauge-element>
+</body>
+</html>

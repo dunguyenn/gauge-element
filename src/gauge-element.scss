@@ -1,0 +1,56 @@
+:host
+{
+    display: inline-block;
+
+    width: 400px;
+    padding: 20px 0;
+
+    vertical-align: top;
+}
+#gauge
+{
+    svg
+    {
+        overflow: visible !important;
+    }
+    .arc
+    {
+        stroke-width: 3;
+        &--default
+        {
+            stroke: rgb(102,102,102);
+        }
+    }
+    .arrow
+    {
+        fill: rgb(35,134,225);
+        stroke-width: 0;
+        &__base
+        {
+            //  styles for arrow base
+        }
+    }
+
+    .mark
+    {
+        fill: rgb(225,225,225);
+        stroke-width: 0;
+    }
+    .label
+    {
+        &__mark
+        {
+            stroke: rgb(102,102,102);
+            stroke-width: 2;
+        }
+        &__text
+        {
+            tspan
+            {
+                font-size: 14px;
+
+                fill: rgb(102,102,102);
+            }
+        }
+    }
+}
