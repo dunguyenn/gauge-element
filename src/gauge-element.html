@@ -1,11 +1,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="gauge-element" attributes="label data value aperture">
+<polymer-element name="gauge-element" attributes="data value aperture">
   <!-- Shadow DOM subtree -->
   <template>
     <link rel="stylesheet" href="gauge-element.css">
     <div id="gauge"></div>
-    <button on-click="{{selectNext}}">selectNext</button>
   </template>
 
   <script src="../bower_components/raphael/raphael.js"></script>
