@@ -3,7 +3,6 @@
     display: inline-block;
 
     width: 400px;
-    height: 340px;
 }
 #gauge
 {
@@ -14,15 +13,9 @@
         {
             stroke: rgb(102,102,102);
         }
-        &--with-color
-        {
-            stroke-width: 3;
-        }
     }
     .arrow
     {
-        z-index: 10;
-
         fill: rgb(35,134,225);
         stroke-width: 0;
     }
@@ -31,5 +24,18 @@
     {
         fill: rgb(225,225,225);
         stroke-width: 0;
+    }
+    .label
+    {
+        &__mark
+        {
+            stroke: rgb(0,0,0);
+            stroke-width: 2;
+        }
+        &__text
+        {
+            font: Helvetica !important;
+            font-size: 15px !important;
+        }
     }
 }

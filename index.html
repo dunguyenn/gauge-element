@@ -9,13 +9,18 @@
   <h1>Gauge element</h1>
   <hr/>
   <gauge-element label="First gauge"
-                 data="[0,1,{'label':'two'},3,4,{'label':'5','color':'rgb(255,166,30)'},{'label': 6, 'color':'rgb(255,41,5)'}]"
+                 data="[0,1,{'label':'two'},3,'four',{'label':5,'color':'rgb(255,166,30)'},{'label': 6, 'color':'rgb(255,41,5)'}]"
                  value="2">
   </gauge-element>
   <gauge-element label="Second gauge"
                  data='[0,1,{"label":"two"}]'
                  value="0"
                  aperture="120">
+  </gauge-element>
+  <gauge-element label="Third gauge"
+                 data='[0,1,2,3,4,5,6,7,8,9,10,11,12]'
+                 value="0"
+                 aperture="360">
   </gauge-element>
 </body>
 </html>
